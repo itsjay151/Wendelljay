@@ -30,6 +30,7 @@
                     animation: {
                         'gradient-x': 'gradient-x 15s ease infinite',
                         'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                     },
                     keyframes: {
                         'gradient-x': {
@@ -246,7 +247,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
                 <!-- Project Card 1 -->
-                <div class="glass-panel rounded-2xl overflow-hidden group border border-white/5 hover:border-brand-primary/30 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-primary/10 flex flex-col">
+                <a href="featured1.html" class="block glass-panel rounded-2xl overflow-hidden group border border-white/5 hover:border-brand-primary/30 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-primary/10 flex flex-col">
                     <!-- Image -->
                     <div class="relative h-48 bg-slate-800 overflow-hidden">
                         <img src="featured 1.png" alt="Enterprise Inventory System" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
@@ -264,57 +265,53 @@
                         <p class="text-brand-muted text-sm mb-6 flex-grow leading-relaxed">
                             A inventory management system featuring a POS interface, real-time stock updates, and detailed sales analytics for streamlined operations.
                         </p>
-                        <a href="#" class="inline-flex items-center gap-2 text-brand-accent font-medium text-sm hover:text-white transition-colors">
+                        <span class="inline-flex items-center gap-2 text-brand-accent font-medium text-sm hover:text-white transition-colors">
                             View Details 
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                        </a>
+                        </span>
                     </div>
-                </div>
+                </a>
 
                 <!-- Project Card 2 -->
-                <div class="glass-panel rounded-2xl overflow-hidden group border border-white/5 hover:border-brand-secondary/30 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-secondary/10 flex flex-col">
-                    <!-- Image Placeholder -->
+                <a href="featured2.html" class="block glass-panel rounded-2xl overflow-hidden group border border-white/5 hover:border-brand-secondary/30 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-secondary/10 flex flex-col">
+                    <!-- Image -->
                     <div class="relative h-48 bg-slate-800 overflow-hidden">
+                        <img src="featured 2.png" alt="Library Management System" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                         <div class="absolute inset-0 bg-gradient-to-t from-brand-card to-transparent opacity-80 z-10"></div>
-                        <div class="w-full h-full flex items-center justify-center text-slate-600 bg-slate-800 group-hover:scale-105 transition-transform duration-500">
-                             <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                        </div>
                         <div class="absolute top-4 left-4 z-20 flex gap-2">
-                            <span class="px-2 py-1 text-xs font-semibold bg-brand-secondary/80 backdrop-blur-md rounded-md text-white">...</span>
-                            <span class="px-2 py-1 text-xs font-semibold bg-white/10 backdrop-blur-md rounded-md text-white">...</span>
+                            <span class="px-2 py-1 text-xs font-semibold bg-brand-secondary/80 backdrop-blur-md rounded-md text-white">Python</span>
+                            <span class="px-2 py-1 text-xs font-semibold bg-white/10 backdrop-blur-md rounded-md text-white">Tkinter</span>
                         </div>
                     </div>
                     <!-- Content -->
                     <div class="p-6 flex flex-col flex-grow bg-brand-card/50">
-                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand-secondary transition-colors">...</h3>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand-secondary transition-colors">Library Management System</h3>
                         <p class="text-brand-muted text-sm mb-6 flex-grow leading-relaxed">
-                            ...
+                            A desktop-based library management system for organizing books, tracking member loans, and managing borrower records efficiently.
                         </p>
-                        <a href="#" class="inline-flex items-center gap-2 text-brand-accent font-medium text-sm hover:text-white transition-colors">
+                        <span class="inline-flex items-center gap-2 text-brand-accent font-medium text-sm hover:text-white transition-colors">
                             View Details 
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                        </a>
+                        </span>
                     </div>
-                </div>
+                </a>
 
                 <!-- Project Card 3 -->
                 <div class="glass-panel rounded-2xl overflow-hidden group border border-white/5 hover:border-brand-accent/30 transition-all duration-300 hover:shadow-2xl hover:shadow-brand-accent/10 flex flex-col">
-                    <!-- Image Placeholder -->
+                    <!-- Image -->
                     <div class="relative h-48 bg-slate-800 overflow-hidden">
+                        <img src="featured 3.png" alt="Student Information System" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
                         <div class="absolute inset-0 bg-gradient-to-t from-brand-card to-transparent opacity-80 z-10"></div>
-                        <div class="w-full h-full flex items-center justify-center text-slate-600 bg-slate-800 group-hover:scale-105 transition-transform duration-500">
-                             <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                        </div>
                         <div class="absolute top-4 left-4 z-20 flex gap-2">
-                            <span class="px-2 py-1 text-xs font-semibold bg-brand-accent/80 backdrop-blur-md rounded-md text-white">...</span>
-                            <span class="px-2 py-1 text-xs font-semibold bg-white/10 backdrop-blur-md rounded-md text-white">...</span>
+                            <span class="px-2 py-1 text-xs font-semibold bg-brand-accent/80 backdrop-blur-md rounded-md text-white">Java</span>
+                            <span class="px-2 py-1 text-xs font-semibold bg-white/10 backdrop-blur-md rounded-md text-white">MySQL</span>
                         </div>
                     </div>
                     <!-- Content -->
                     <div class="p-6 flex flex-col flex-grow bg-brand-card/50">
-                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand-accent transition-colors">...</h3>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-brand-accent transition-colors">Student Information System</h3>
                         <p class="text-brand-muted text-sm mb-6 flex-grow leading-relaxed">
-                            ...
+                            A comprehensive student records system for managing student profiles, enrollment, and grade tracking with a secure database backend.
                         </p>
                         <a href="#" class="inline-flex items-center gap-2 text-brand-accent font-medium text-sm hover:text-white transition-colors">
                             View Details 
