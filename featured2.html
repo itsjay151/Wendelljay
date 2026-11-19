@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System | Wendell Jay Remetir Lorilla</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Poppins', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            dark: '#0B0F19',
+                            card: '#111827',
+                            primary: '#6366f1',
+                            secondary: '#a855f7',
+                            accent: '#3b82f6',
+                            light: '#f8fafc',
+                            muted: '#94a3b8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #0B0F19; color: #f8fafc; -webkit-font-smoothing: antialiased; }
+        .glass-panel {
+            background: rgba(17, 24, 39, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #6366f1, #a855f7, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased overflow-x-hidden selection:bg-brand-secondary selection:text-white">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 glass-panel border-b border-white/10">
+        <div class="container mx-auto px-6 lg:px-12 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-xl font-bold tracking-tighter flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-primary to-brand-secondary flex items-center justify-center text-white text-sm">JJ</div>
+                <span>PortFolio</span>
+            </a>
+            <a href="index.html#projects" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm font-medium transition-all flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                Back to Projects
+            </a>
+        </div>
+    </nav>
+
+    <main class="pt-28 pb-20 container mx-auto px-6 lg:px-12">
+        <!-- Header -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-14">
+            <div>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="px-3 py-1 text-xs font-semibold bg-brand-secondary/80 rounded-md text-white">Python</span>
+                    <span class="px-3 py-1 text-xs font-semibold bg-white/10 rounded-md text-white">Tkinter</span>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-4">
+                    Library <span class="gradient-text">Management System</span>
+                </h1>
+                <p class="text-brand-muted leading-relaxed mb-6">
+                    A desktop-based library management system built to organize book catalogs, track member loans, handle borrow/return transactions, and maintain accurate borrower records.
+                </p>
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="glass-panel p-4 rounded-xl text-center">
+                        <p class="text-xs text-brand-muted">Total Books</p>
+                        <p id="stat-total" class="text-xl font-bold text-white">0</p>
+                    </div>
+                    <div class="glass-panel p-4 rounded-xl text-center">
+                        <p class="text-xs text-brand-muted">Available</p>
+                        <p id="stat-available" class="text-xl font-bold text-emerald-400">0</p>
+                    </div>
+                    <div class="glass-panel p-4 rounded-xl text-center">
+                        <p class="text-xs text-brand-muted">Borrowed</p>
+                        <p id="stat-borrowed" class="text-xl font-bold text-brand-secondary">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel p-3 rounded-2xl border border-white/10">
+                <img src="featured 2.png" alt="Library Management System Preview"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                     class="w-full h-72 object-cover rounded-xl">
+                <div class="hidden w-full h-72 rounded-xl bg-gradient-to-br from-brand-secondary/20 to-brand-accent/20 items-center justify-center text-brand-muted text-sm">
+                    Preview Image (featured 2.png)
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Library Demo -->
+        <section class="glass-panel rounded-3xl p-6 md:p-8 border border-white/10">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-white/10">
+                <div>
+                    <h2 class="text-2xl font-bold text-white">Interactive Library Catalog Demo</h2>
+                    <p class="text-sm text-brand-muted">Search titles, check out books to members, process returns, or add new books.</p>
+                </div>
+                <button onclick="document.getElementById('add-book-form').classList.toggle('hidden')"
+                        class="px-5 py-2.5 rounded-full bg-gradient-to-r from-brand-primary to-brand-secondary text-white text-sm font-semibold hover:opacity-90 transition">
+                    + Add Book
+                </button>
+            </div>
+
+            <!-- Add Book Form -->
+            <form id="add-book-form" onsubmit="addBook(event)" class="hidden mb-6 p-4 rounded-2xl bg-brand-dark/80 border border-white/10 grid grid-cols-1 md:grid-cols-4 gap-3">
+                <input id="book-title" type="text" placeholder="Book Title" required class="px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-white focus:outline-none focus:border-brand-secondary">
+                <input id="book-author" type="text" placeholder="Author" required class="px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-white focus:outline-none focus:border-brand-secondary">
+                <input id="book-isbn" type="text" placeholder="ISBN (e.g. 978-0132350884)" required class="px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-white focus:outline-none focus:border-brand-secondary">
+                <button type="submit" class="px-4 py-2 rounded-lg bg-brand-secondary hover:bg-brand-secondary/80 text-white text-sm font-semibold">Add to Catalog</button>
+            </form>
+
+            <!-- Search & Filter -->
+            <div class="flex flex-col sm:flex-row gap-3 mb-6">
+                <input id="lib-search" type="text" oninput="renderBooks()" placeholder="Search by title, author, ISBN, or borrower..."
+                       class="flex-grow px-4 py-2.5 rounded-xl bg-brand-dark/80 border border-white/10 text-sm text-white focus:outline-none focus:border-brand-secondary">
+                <select id="lib-filter" onchange="renderBooks()" class="px-4 py-2.5 rounded-xl bg-brand-dark border border-white/10 text-sm text-white focus:outline-none focus:border-brand-secondary">
+                    <option value="all">All Status</option>
+                    <option value="available">Available Only</option>
+                    <option value="borrowed">Borrowed Only</option>
+                </select>
+            </div>
+
+            <!-- Table -->
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b border-white/10 text-xs uppercase text-brand-muted">
+                            <th class="py-3 px-4">Title &amp; Author</th>
+                            <th class="py-3 px-4">ISBN</th>
+                            <th class="py-3 px-4">Status</th>
+                            <th class="py-3 px-4">Borrower</th>
+                            <th class="py-3 px-4 text-right">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="book-table" class="divide-y divide-white/5 text-sm"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Next/Prev Project Nav -->
+        <div class="mt-12 flex justify-between items-center">
+            <a href="featured1.html" class="text-sm text-brand-muted hover:text-white transition">← Inventory System / POS</a>
+            <a href="featured3.html" class="text-sm text-brand-accent hover:text-white transition font-medium">Next: Student Information System →</a>
+        </div>
+    </main>
+
+    <!-- Borrow Modal -->
+    <div id="borrow-modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
+        <div class="glass-panel rounded-2xl p-6 w-full max-w-md border border-white/10">
+            <h3 class="text-lg font-bold text-white mb-2">Issue Book</h3>
+            <p id="modal-book-name" class="text-sm text-brand-muted mb-4"></p>
+            <input id="borrower-input" type="text" placeholder="Enter borrower's full name"
+                   class="w-full px-4 py-2.5 rounded-xl bg-brand-dark border border-white/10 text-sm text-white mb-4 focus:outline-none focus:border-brand-secondary">
+            <div class="flex justify-end gap-3">
+                <button onclick="closeBorrowModal()" class="px-4 py-2 rounded-lg bg-white/10 text-sm text-white hover:bg-white/20">Cancel</button>
+                <button onclick="confirmBorrow()" class="px-5 py-2 rounded-lg bg-brand-secondary text-sm font-semibold text-white hover:opacity-90">Confirm Loan</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let books = [
+            { id: 1, title: 'Clean Code', author: 'Robert C. Martin', isbn: '978-0132350884', status: 'available', borrower: '' },
+            { id: 2, title: 'Python Crash Course', author: 'Eric Matthes', isbn: '978-1593279288', status: 'borrowed', borrower: 'Juan Dela Cruz' },
+            { id: 3, title: 'Database System Concepts', author: 'Abraham Silberschatz', isbn: '978-0078022159', status: 'available', borrower: '' },
+            { id: 4, title: 'Design Patterns', author: 'Erich Gamma et al.', isbn: '978-0201633610', status: 'borrowed', borrower: 'Maria Santos' },
+            { id: 5, title: 'Introduction to Algorithms', author: 'Thomas H. Cormen', isbn: '978-0262046305', status: 'available', borrower: '' }
+        ];
+        let activeBorrowId = null;
+
+        function addBook(e) {
+            e.preventDefault();
+            books.unshift({
+                id: Date.now(),
+                title: document.getElementById('book-title').value.trim(),
+                author: document.getElementById('book-author').value.trim(),
+                isbn: document.getElementById('book-isbn').value.trim(),
+                status: 'available',
+                borrower: ''
+            });
+            e.target.reset();
+            document.getElementById('add-book-form').classList.add('hidden');
+            renderBooks();
+        }
+
+        function openBorrowModal(id) {
+            activeBorrowId = id;
+            const book = books.find(b => b.id === id);
+            document.getElementById('modal-book-name').textContent = `Book: "${book.title}"`;
+            document.getElementById('borrower-input').value = '';
+            const modal = document.getElementById('borrow-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.getElementById('borrower-input').focus();
+        }
+
+        function closeBorrowModal() {
+            const modal = document.getElementById('borrow-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            activeBorrowId = null;
+        }
+
+        function confirmBorrow() {
+            const name = document.getElementById('borrower-input').value.trim();
+            if (!name) return;
+            const book = books.find(b => b.id === activeBorrowId);
+            if (book) {
+                book.status = 'borrowed';
+                book.borrower = name;
+            }
+            closeBorrowModal();
+            renderBooks();
+        }
+
+        function returnBook(id) {
+            const book = books.find(b => b.id === id);
+            if (book) {
+                book.status = 'available';
+                book.borrower = '';
+            }
+            renderBooks();
+        }
+
+        function renderBooks() {
+            const q = document.getElementById('lib-search').value.toLowerCase();
+            const filter = document.getElementById('lib-filter').value;
+            const filtered = books.filter(b => {
+                const matchesSearch = b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q) || b.isbn.toLowerCase().includes(q) || b.borrower.toLowerCase().includes(q);
+                const matchesStatus = filter === 'all' || b.status === filter;
+                return matchesSearch && matchesStatus;
+            });
+
+            document.getElementById('book-table').innerHTML = filtered.length ? filtered.map(b => `
+                <tr class="hover:bg-white/5 transition">
+                    <td class="py-4 px-4">
+                        <p class="font-semibold text-white">${b.title}</p>
+                        <p class="text-xs text-brand-muted">${b.author}</p>
+                    </td>
+                    <td class="py-4 px-4 text-brand-muted font-mono text-xs">${b.isbn}</td>
+                    <td class="py-4 px-4">
+                        <span class="px-2.5 py-1 rounded-full text-xs font-semibold ${b.status === 'available' ? 'bg-emerald-500/20 text-emerald-400' : 'bg-brand-secondary/20 text-brand-secondary'}">
+                            ${b.status === 'available' ? 'Available' : 'Borrowed'}
+                        </span>
+                    </td>
+                    <td class="py-4 px-4 text-brand-muted">${b.borrower || '—'}</td>
+                    <td class="py-4 px-4 text-right">
+                        ${b.status === 'available'
+                            ? `<button onclick="openBorrowModal(${b.id})" class="px-3 py-1.5 rounded-lg bg-brand-secondary hover:bg-brand-secondary/80 text-white text-xs font-semibold">Borrow</button>`
+                            : `<button onclick="returnBook(${b.id})" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold">Return</button>`
+                        }
+                    </td>
+                </tr>
+            `).join('') : `<tr><td colspan="5" class="py-8 text-center text-brand-muted">No matching books found.</td></tr>`;
+
+            document.getElementById('stat-total').textContent = books.length;
+            document.getElementById('stat-available').textContent = books.filter(b => b.status === 'available').length;
+            document.getElementById('stat-borrowed').textContent = books.filter(b => b.status === 'borrowed').length;
+        }
+
+        renderBooks();
+    </script>
+</body>
+</html>

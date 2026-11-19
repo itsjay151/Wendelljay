@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory System / POS | Wendell Jay Remetir Lorilla</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Poppins', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            dark: '#0B0F19',
+                            card: '#111827',
+                            primary: '#6366f1',
+                            secondary: '#a855f7',
+                            accent: '#3b82f6',
+                            light: '#f8fafc',
+                            muted: '#94a3b8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #0B0F19; color: #f8fafc; -webkit-font-smoothing: antialiased; }
+        .glass-panel {
+            background: rgba(17, 24, 39, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #6366f1, #a855f7, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased overflow-x-hidden selection:bg-brand-secondary selection:text-white">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 glass-panel border-b border-white/10">
+        <div class="container mx-auto px-6 lg:px-12 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-xl font-bold tracking-tighter flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-primary to-brand-secondary flex items-center justify-center text-white text-sm">JJ</div>
+                <span>PortFolio</span>
+            </a>
+            <div class="flex items-center gap-4">
+                <a href="index.html#projects" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm font-medium transition-all flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                    Back to Projects
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="pt-28 pb-20 container mx-auto px-6 lg:px-12">
+        <!-- Header -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-14">
+            <div>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="px-3 py-1 text-xs font-semibold bg-brand-primary/80 rounded-md text-white">Java</span>
+                    <span class="px-3 py-1 text-xs font-semibold bg-white/10 rounded-md text-white">MySQL</span>
+                    <span class="px-3 py-1 text-xs font-semibold bg-brand-secondary/80 rounded-md text-white">HTML</span>
+                    <span class="px-3 py-1 text-xs font-semibold bg-brand-accent/80 rounded-md text-white">UI Design</span>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-4">
+                    Inventory System / <span class="gradient-text">POS</span>
+                </h1>
+                <p class="text-brand-muted leading-relaxed mb-6">
+                    An inventory management system featuring a Point of Sale (POS) interface, real-time stock updates, low-stock alerts, and sales analytics designed for fast retail checkout and streamlined operations.
+                </p>
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="glass-panel p-4 rounded-xl text-center">
+                        <p class="text-xs text-brand-muted">Total Sales</p>
+                        <p id="stat-revenue" class="text-xl font-bold text-brand-primary">₱0.00</p>
+                    </div>
+                    <div class="glass-panel p-4 rounded-xl text-center">
+                        <p class="text-xs text-brand-muted">Orders</p>
+                        <p id="stat-orders" class="text-xl font-bold text-brand-secondary">0</p>
+                    </div>
+                    <div class="glass-panel p-4 rounded-xl text-center">
+                        <p class="text-xs text-brand-muted">Low Stock</p>
+                        <p id="stat-lowstock" class="text-xl font-bold text-amber-400">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel p-3 rounded-2xl border border-white/10">
+                <img src="featured 1.png" alt="Inventory System / POS Preview"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                     class="w-full h-72 object-cover rounded-xl">
+                <div class="hidden w-full h-72 rounded-xl bg-gradient-to-br from-brand-primary/20 to-brand-secondary/20 items-center justify-center text-brand-muted text-sm">
+                    Preview Image (featured 1.png)
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Interactive Demo -->
+        <section class="glass-panel rounded-3xl p-6 md:p-8 border border-white/10">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-white/10">
+                <div>
+                    <h2 class="text-2xl font-bold text-white">Interactive POS &amp; Inventory Demo</h2>
+                    <p class="text-sm text-brand-muted">Click items to ring up an order, adjust stock in real time, or add new products.</p>
+                </div>
+                <button onclick="toggleAddModal()" class="px-5 py-2.5 rounded-full bg-gradient-to-r from-brand-primary to-brand-secondary text-white text-sm font-semibold hover:opacity-90 transition">
+                    + Add Product
+                </button>
+            </div>
+
+            <!-- Add Product Form (Collapsible) -->
+            <form id="add-product-form" onsubmit="addNewProduct(event)" class="hidden mb-6 p-4 rounded-2xl bg-brand-dark/80 border border-white/10 grid grid-cols-1 md:grid-cols-5 gap-3">
+                <input id="new-name" type="text" placeholder="Product Name" required class="px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-white focus:outline-none focus:border-brand-primary">
+                <input id="new-category" type="text" placeholder="Category (e.g. Drinks)" required class="px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-white focus:outline-none focus:border-brand-primary">
+                <input id="new-price" type="number" step="0.01" min="1" placeholder="Price (₱)" required class="px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-white focus:outline-none focus:border-brand-primary">
+                <input id="new-stock" type="number" min="1" placeholder="Initial Stock" required class="px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-white focus:outline-none focus:border-brand-primary">
+                <button type="submit" class="px-4 py-2 rounded-lg bg-brand-primary hover:bg-brand-primary/80 text-white text-sm font-semibold">Save Item</button>
+            </form>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Product Catalog -->
+                <div class="lg:col-span-2">
+                    <input id="pos-search" type="text" oninput="renderProducts()" placeholder="Search products by name or category..."
+                           class="w-full mb-4 px-4 py-2.5 rounded-xl bg-brand-dark/80 border border-white/10 text-sm text-white focus:outline-none focus:border-brand-primary">
+                    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+                </div>
+
+                <!-- Cart / Checkout -->
+                <div class="bg-brand-dark/80 rounded-2xl p-5 border border-white/10 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-4 flex justify-between items-center">
+                            Current Order
+                            <button onclick="clearCart()" class="text-xs text-red-400 hover:underline font-normal">Clear</button>
+                        </h3>
+                        <div id="cart-items" class="space-y-3 max-h-64 overflow-y-auto pr-1 mb-4">
+                            <p class="text-sm text-brand-muted text-center py-6">Cart is empty. Click a product to add.</p>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-white/10 pt-4 space-y-2 text-sm">
+                        <div class="flex justify-between text-brand-muted">
+                            <span>Subtotal</span><span id="cart-subtotal">₱0.00</span>
+                        </div>
+                        <div class="flex justify-between text-brand-muted">
+                            <span>VAT (12%)</span><span id="cart-tax">₱0.00</span>
+                        </div>
+                        <div class="flex justify-between text-white font-bold text-base pt-2 border-t border-white/10">
+                            <span>Total</span><span id="cart-total">₱0.00</span>
+                        </div>
+                        <button onclick="checkout()" class="w-full mt-4 py-3 rounded-xl bg-gradient-to-r from-brand-primary to-brand-secondary text-white font-semibold hover:shadow-lg hover:shadow-brand-primary/30 transition">
+                            Complete Sale
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Next/Prev Project Nav -->
+        <div class="mt-12 flex justify-between items-center">
+            <a href="featured3.html" class="text-sm text-brand-muted hover:text-white transition">← Student Information System</a>
+            <a href="featured2.html" class="text-sm text-brand-accent hover:text-white transition font-medium">Next: Library Management System →</a>
+        </div>
+    </main>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 px-5 py-3 rounded-xl bg-emerald-600 text-white text-sm font-medium shadow-xl opacity-0 pointer-events-none transition-all duration-300 z-50"></div>
+
+    <script>
+        let products = [
+            { id: 1, name: 'Wireless Mouse', category: 'Peripherals', price: 650, stock: 12 },
+            { id: 2, name: 'Mechanical Keyboard', category: 'Peripherals', price: 1850, stock: 5 },
+            { id: 3, name: 'USB-C Hub 6-in-1', category: 'Accessories', price: 920, stock: 8 },
+            { id: 4, name: 'Laptop Stand Aluminum', category: 'Accessories', price: 540, stock: 3 },
+            { id: 5, name: '24" IPS Monitor', category: 'Displays', price: 6200, stock: 4 },
+            { id: 6, name: 'Gaming Headset', category: 'Audio', price: 1290, stock: 9 }
+        ];
+        let cart = [];
+        let totalRevenue = 0;
+        let totalOrders = 0;
+
+        function showToast(msg, isError = false) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.className = `fixed bottom-6 right-6 px-5 py-3 rounded-xl text-white text-sm font-medium shadow-xl transition-all duration-300 z-50 ${isError ? 'bg-red-600' : 'bg-emerald-600'}`;
+            setTimeout(() => { t.classList.add('opacity-0', 'pointer-events-none'); }, 2500);
+        }
+
+        function toggleAddModal() {
+            document.getElementById('add-product-form').classList.toggle('hidden');
+        }
+
+        function addNewProduct(e) {
+            e.preventDefault();
+            const name = document.getElementById('new-name').value.trim();
+            const category = document.getElementById('new-category').value.trim();
+            const price = parseFloat(document.getElementById('new-price').value);
+            const stock = parseInt(document.getElementById('new-stock').value);
+            products.unshift({ id: Date.now(), name, category, price, stock });
+            e.target.reset();
+            toggleAddModal();
+            renderProducts();
+            showToast(`Added "${name}" to inventory.`);
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            const existing = cart.find(c => c.id === id);
+            const currentQty = existing ? existing.qty : 0;
+
+            if (currentQty >= product.stock) {
+                showToast('Not enough stock available!', true);
+                return;
+            }
+            if (existing) existing.qty++;
+            else cart.push({ ...product, qty: 1 });
+            renderCart();
+        }
+
+        function updateQty(id, delta) {
+            const item = cart.find(c => c.id === id);
+            const product = products.find(p => p.id === id);
+            if (!item) return;
+            const nextQty = item.qty + delta;
+            if (nextQty <= 0) {
+                cart = cart.filter(c => c.id !== id);
+            } else if (nextQty > product.stock) {
+                showToast('Stock limit reached!', true);
+                return;
+            } else {
+                item.qty = nextQty;
+            }
+            renderCart();
+        }
+
+        function clearCart() {
+            cart = [];
+            renderCart();
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                showToast('Cart is empty.', true);
+                return;
+            }
+            let subtotal = 0;
+            cart.forEach(item => {
+                const prod = products.find(p => p.id === item.id);
+                if (prod) prod.stock -= item.qty;
+                subtotal += item.price * item.qty;
+            });
+            const grandTotal = subtotal * 1.12;
+            totalRevenue += grandTotal;
+            totalOrders++;
+            cart = [];
+            renderProducts();
+            renderCart();
+            showToast(`Sale completed! Total: ₱${grandTotal.toFixed(2)}`);
+        }
+
+        function renderProducts() {
+            const query = document.getElementById('pos-search').value.toLowerCase();
+            const grid = document.getElementById('product-grid');
+            const filtered = products.filter(p =>
+                p.name.toLowerCase().includes(query) || p.category.toLowerCase().includes(query)
+            );
+
+            grid.innerHTML = filtered.map(p => `
+                <div class="p-4 rounded-xl bg-brand-dark/70 border border-white/10 hover:border-brand-primary/60 transition flex flex-col justify-between">
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <span class="text-xs text-brand-secondary font-medium">${p.category}</span>
+                            <h4 class="font-semibold text-white">${p.name}</h4>
+                        </div>
+                        <span class="text-xs px-2 py-1 rounded-md font-semibold ${p.stock === 0 ? 'bg-red-500/20 text-red-400' : p.stock <= 3 ? 'bg-amber-500/20 text-amber-400' : 'bg-emerald-500/20 text-emerald-400'}">
+                            ${p.stock === 0 ? 'Out of stock' : `Stock: ${p.stock}`}
+                        </span>
+                    </div>
+                    <div class="flex justify-between items-center mt-3">
+                        <span class="text-lg font-bold text-white">₱${p.price.toLocaleString('en-PH', {minimumFractionDigits: 2})}</span>
+                        <button onclick="addToCart(${p.id})" ${p.stock === 0 ? 'disabled' : ''}
+                                class="px-3 py-1.5 rounded-lg text-xs font-semibold transition ${p.stock === 0 ? 'bg-white/5 text-brand-muted cursor-not-allowed' : 'bg-brand-primary hover:bg-brand-secondary text-white'}">
+                            + Add
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            const lowStockCount = products.filter(p => p.stock <= 3).length;
+            document.getElementById('stat-revenue').textContent = `₱${totalRevenue.toLocaleString('en-PH', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            document.getElementById('stat-orders').textContent = totalOrders;
+            document.getElementById('stat-lowstock').textContent = lowStockCount;
+        }
+
+        function renderCart() {
+            const container = document.getElementById('cart-items');
+            if (cart.length === 0) {
+                container.innerHTML = `<p class="text-sm text-brand-muted text-center py-6">Cart is empty. Click a product to add.</p>`;
+            } else {
+                container.innerHTML = cart.map(item => `
+                    <div class="flex justify-between items-center bg-white/5 p-3 rounded-xl">
+                        <div>
+                            <p class="text-sm font-medium text-white">${item.name}</p>
+                            <p class="text-xs text-brand-muted">₱${item.price.toFixed(2)} each</p>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="updateQty(${item.id}, -1)" class="w-6 h-6 rounded bg-white/10 hover:bg-white/20 text-white text-xs">-</button>
+                            <span class="text-sm font-semibold w-5 text-center">${item.qty}</span>
+                            <button onclick="updateQty(${item.id}, 1)" class="w-6 h-6 rounded bg-white/10 hover:bg-white/20 text-white text-xs">+</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+            const tax = subtotal * 0.12;
+            const total = subtotal + tax;
+            document.getElementById('cart-subtotal').textContent = `₱${subtotal.toFixed(2)}`;
+            document.getElementById('cart-tax').textContent = `₱${tax.toFixed(2)}`;
+            document.getElementById('cart-total').textContent = `₱${total.toFixed(2)}`;
+        }
+
+        renderProducts();
+        renderCart();
+    </script>
+</body>
+</html>

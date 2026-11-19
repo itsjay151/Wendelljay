@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Information System | Wendell Jay Remetir Lorilla</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Poppins', 'sans-serif'] },
+                    colors: {
+                        brand: {
+                            dark: '#0B0F19',
+                            card: '#111827',
+                            primary: '#6366f1',
+                            secondary: '#a855f7',
+                            accent: '#3b82f6',
+                            light: '#f8fafc',
+                            muted: '#94a3b8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #0B0F19; color: #f8fafc; -webkit-font-smoothing: antialiased; }
+        .glass-panel {
+            background: rgba(17, 24, 39, 0.65);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #6366f1, #a855f7, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased overflow-x-hidden selection:bg-brand-secondary selection:text-white">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 glass-panel border-b border-white/10">
+        <div class="container mx-auto px-6 lg:px-12 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-xl font-bold tracking-tighter flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-brand-primary to-brand-secondary flex items-center justify-center text-white text-sm">JJ</div>
+                <span>PortFolio</span>
+            </a>
+            <a href="index.html#projects" class="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white text-sm font-medium transition-all flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                Back to Projects
+            </a>
+        </div>
+    </nav>
+
+    <main class="pt-28 pb-20 container mx-auto px-6 lg:px-12">
+        <!-- Header -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-14">
+            <div>
+                <div class="flex flex-wrap gap-2 mb-4">
+                    <span class="px-3 py-1 text-xs font-semibold bg-brand-accent/80 rounded-md text-white">Java</span>
+                    <span class="px-3 py-1 text-xs font-semibold bg-white/10 rounded-md text-white">MySQL</span>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-4">
+                    Student <span class="gradient-text">Information System</span>
+                </h1>
+                <p class="text-brand-muted leading-relaxed mb-6">
+                    A comprehensive student records system for managing student profiles, course enrollment, academic standing, and grade tracking backed by a structured relational database.
+                </p>
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="glass-panel p-4 rounded-xl text-center">
+                        <p class="text-xs text-brand-muted">Enrolled</p>
+                        <p id="stat-enrolled" class="text-xl font-bold text-white">0</p>
+                    </div>
+                    <div class="glass-panel p-4 rounded-xl text-center">
+                        <p class="text-xs text-brand-muted">Avg GWA</p>
+                        <p id="stat-gwa" class="text-xl font-bold text-brand-accent">0.00</p>
+                    </div>
+                    <div class="glass-panel p-4 rounded-xl text-center">
+                        <p class="text-xs text-brand-muted">Dean's List</p>
+                        <p id="stat-deans" class="text-xl font-bold text-emerald-400">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel p-3 rounded-2xl border border-white/10">
+                <img src="featured 3.png" alt="Student Information System Preview"
+                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                     class="w-full h-72 object-cover rounded-xl">
+                <div class="hidden w-full h-72 rounded-xl bg-gradient-to-br from-brand-accent/20 to-brand-primary/20 items-center justify-center text-brand-muted text-sm">
+                    Preview Image (featured 3.png)
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive SIS Demo -->
+        <section class="glass-panel rounded-3xl p-6 md:p-8 border border-white/10">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-white/10">
+                <div>
+                    <h2 class="text-2xl font-bold text-white">Interactive Student Records Demo</h2>
+                    <p class="text-sm text-brand-muted">Enroll students, filter by program, update GWA (1.00 highest – 5.00 failed), or remove records.</p>
+                </div>
+                <button onclick="document.getElementById('enroll-form').classList.toggle('hidden')"
+                        class="px-5 py-2.5 rounded-full bg-gradient-to-r from-brand-primary to-brand-accent text-white text-sm font-semibold hover:opacity-90 transition">
+                    + Enroll Student
+                </button>
+            </div>
+
+            <!-- Enroll Form -->
+            <form id="enroll-form" onsubmit="enrollStudent(event)" class="hidden mb-6 p-4 rounded-2xl bg-brand-dark/80 border border-white/10 grid grid-cols-1 md:grid-cols-5 gap-3">
+                <input id="stu-name" type="text" placeholder="Full Name" required class="px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-white focus:outline-none focus:border-brand-accent">
+                <select id="stu-course" class="px-3 py-2 rounded-lg bg-brand-dark border border-white/10 text-sm text-white focus:outline-none focus:border-brand-accent">
+                    <option value="BSIT">BSIT</option>
+                    <option value="BSCS">BSCS</option>
+                    <option value="BSIS">BSIS</option>
+                </select>
+                <select id="stu-year" class="px-3 py-2 rounded-lg bg-brand-dark border border-white/10 text-sm text-white focus:outline-none focus:border-brand-accent">
+                    <option value="1st Year">1st Year</option>
+                    <option value="2nd Year">2nd Year</option>
+                    <option value="3rd Year">3rd Year</option>
+                    <option value="4th Year">4th Year</option>
+                </select>
+                <input id="stu-gwa" type="number" step="0.05" min="1.00" max="5.00" placeholder="GWA (1.00 - 5.00)" required class="px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-sm text-white focus:outline-none focus:border-brand-accent">
+                <button type="submit" class="px-4 py-2 rounded-lg bg-brand-accent hover:bg-brand-accent/80 text-white text-sm font-semibold">Save Record</button>
+            </form>
+
+            <!-- Search & Course Filter -->
+            <div class="flex flex-col sm:flex-row gap-3 mb-6">
+                <input id="sis-search" type="text" oninput="renderStudents()" placeholder="Search by Student ID or Name..."
+                       class="flex-grow px-4 py-2.5 rounded-xl bg-brand-dark/80 border border-white/10 text-sm text-white focus:outline-none focus:border-brand-accent">
+                <select id="sis-course-filter" onchange="renderStudents()" class="px-4 py-2.5 rounded-xl bg-brand-dark border border-white/10 text-sm text-white focus:outline-none focus:border-brand-accent">
+                    <option value="all">All Programs</option>
+                    <option value="BSIT">BSIT</option>
+                    <option value="BSCS">BSCS</option>
+                    <option value="BSIS">BSIS</option>
+                </select>
+            </div>
+
+            <!-- Table -->
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b border-white/10 text-xs uppercase text-brand-muted">
+                            <th class="py-3 px-4">Student ID</th>
+                            <th class="py-3 px-4">Name</th>
+                            <th class="py-3 px-4">Program &amp; Year</th>
+                            <th class="py-3 px-4">GWA</th>
+                            <th class="py-3 px-4">Standing</th>
+                            <th class="py-3 px-4 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="student-table" class="divide-y divide-white/5 text-sm"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Next/Prev Project Nav -->
+        <div class="mt-12 flex justify-between items-center">
+            <a href="featured2.html" class="text-sm text-brand-muted hover:text-white transition">← Library Management System</a>
+            <a href="featured1.html" class="text-sm text-brand-accent hover:text-white transition font-medium">Next: Inventory System / POS →</a>
+        </div>
+    </main>
+
+    <script>
+        let students = [
+            { id: '2024-1001', name: 'Wendell Jay Lorilla', course: 'BSIT', year: '3rd Year', gwa: 1.45 },
+            { id: '2024-1002', name: 'Aira Mendoza', course: 'BSCS', year: '2nd Year', gwa: 1.65 },
+            { id: '2024-1003', name: 'Carlo Villanueva', course: 'BSIT', year: '4th Year', gwa: 2.25 },
+            { id: '2024-1004', name: 'Patricia Reyes', course: 'BSIS', year: '1st Year', gwa: 1.75 },
+            { id: '2024-1005', name: 'Marco Bautista', course: 'BSIT', year: '2nd Year', gwa: 3.25 }
+        ];
+        let nextNum = 1006;
+
+        function getStanding(gwa) {
+            if (gwa <= 1.75) return { label: "Dean's List", cls: 'bg-emerald-500/20 text-emerald-400' };
+            if (gwa <= 3.00) return { label: 'Good Standing', cls: 'bg-brand-accent/20 text-brand-accent' };
+            return { label: 'Probation', cls: 'bg-red-500/20 text-red-400' };
+        }
+
+        function enrollStudent(e) {
+            e.preventDefault();
+            students.unshift({
+                id: `2026-${nextNum++}`,
+                name: document.getElementById('stu-name').value.trim(),
+                course: document.getElementById('stu-course').value,
+                year: document.getElementById('stu-year').value,
+                gwa: parseFloat(document.getElementById('stu-gwa').value)
+            });
+            e.target.reset();
+            document.getElementById('enroll-form').classList.add('hidden');
+            renderStudents();
+        }
+
+        function editGwa(id) {
+            const stu = students.find(s => s.id === id);
+            if (!stu) return;
+            const input = prompt(`Update GWA for ${stu.name} (1.00 - 5.00):`, stu.gwa.toFixed(2));
+            if (input === null) return;
+            const val = parseFloat(input);
+            if (!isNaN(val) && val >= 1.0 && val <= 5.0) {
+                stu.gwa = val;
+                renderStudents();
+            }
+        }
+
+        function deleteStudent(id) {
+            students = students.filter(s => s.id !== id);
+            renderStudents();
+        }
+
+        function renderStudents() {
+            const q = document.getElementById('sis-search').value.toLowerCase();
+            const course = document.getElementById('sis-course-filter').value;
+            const filtered = students.filter(s =>
+                (s.name.toLowerCase().includes(q) || s.id.toLowerCase().includes(q)) &&
+                (course === 'all' || s.course === course)
+            );
+
+            document.getElementById('student-table').innerHTML = filtered.length ? filtered.map(s => {
+                const st = getStanding(s.gwa);
+                return `
+                    <tr class="hover:bg-white/5 transition">
+                        <td class="py-4 px-4 font-mono text-xs text-brand-muted">${s.id}</td>
+                        <td class="py-4 px-4 font-semibold text-white">${s.name}</td>
+                        <td class="py-4 px-4 text-brand-muted">${s.course} • ${s.year}</td>
+                        <td class="py-4 px-4 font-bold text-white">${s.gwa.toFixed(2)}</td>
+                        <td class="py-4 px-4">
+                            <span class="px-2.5 py-1 rounded-full text-xs font-semibold ${st.cls}">${st.label}</span>
+                        </td>
+                        <td class="py-4 px-4 text-right space-x-2">
+                            <button onclick="editGwa('${s.id}')" class="px-3 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs">Edit GWA</button>
+                            <button onclick="deleteStudent('${s.id}')" class="px-3 py-1 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-400 text-xs">Remove</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('') : `<tr><td colspan="6" class="py-8 text-center text-brand-muted">No student records found.</td></tr>`;
+
+            const avg = students.length ? (students.reduce((acc, s) => acc + s.gwa, 0) / students.length) : 0;
+            document.getElementById('stat-enrolled').textContent = students.length;
+            document.getElementById('stat-gwa').textContent = avg.toFixed(2);
+            document.getElementById('stat-deans').textContent = students.filter(s => s.gwa <= 1.75).length;
+        }
+
+        renderStudents();
+    </script>
+</body>
+</html>
